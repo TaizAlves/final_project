@@ -6,7 +6,7 @@
 
 {% block main %}
     <div>
-        <h2>Add your  Medicinal Recipe</h2>
+        <h2>Add your Medicinal Recipe</h2>
     </div>
     <form action="/recipes" method="Post">
                
@@ -27,12 +27,12 @@
         </div>
 
         <div class="form-group">
-            <select class="form-control" name="categoty" required>
+            <select class="form-control" name="category" required>
                 <option disabled selected value>Category</option>
-
-                {% for item in category %}
-                    <option value="{{ item }}" 
-                    >{{ item }}</option>
+                {% for category in category %}
+                    <option value="{{ category[1] }}" 
+                    {% if category[0]== category[1] %} selected {%endif%}
+                    >{{ category[0] }}</option>
                 {% endfor %}
             </select>
         </div>

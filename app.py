@@ -148,15 +148,14 @@ def login():
             
             #tem que colocar como objeto 
             email = [request.form['email']]
-            print(email)
-
+            
             # Query database for username  // return as tuples
             cur.execute("SELECT * FROM users WHERE email = (?)", email)
 
             if not email:
                 flash("Invalid email")
             for rows in cur:
-                print(rows)
+                #print(rows)
                 # Ensure username exists and password is correct
                 if not rows or not check_password_hash(rows[2], request.form["password"]):
                     flash("must provide password")
@@ -172,7 +171,7 @@ def login():
             return redirect("/login")
         
 
-    # User reached route via GET (as by clicking a link or via redirect)
+    # User reached route via GET 
     else:
         return render_template("login.html")
 
@@ -194,18 +193,30 @@ def recipes():
     """Recipies"""
     try:
         if request.method == "GET":
-            cur.execute("SELECT name FROM category")
+            cur.execute("SELECT name, id  FROM category ORDER BY name")
             
             category = []
             for cat in cur:
-                print(cat)
                 category.append(cat)
             
-            print(category)
+            #print(category)
             return render_template("recipes.html", category = category)
 
         else:
+
+            user_id = session["user_id"]
+            title = request.form['title']
+            description = request.form['description']
+            more_info = request.form['more_info']
+            category_id = request.form['category']
+
+            cur.execute("INSERT INTO recipes (title, description, more_info, user_id, category_id) VALUES (?,?,?,?,?)", (title, description, more_info,user_id, category_id)) 
+            con.commit()
+            
+            
+            flash("Thank you! New recipe add.")
             return redirect("/")
+
     except Exception as e:
             print(e)
             return redirect("/recipes")
