@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div>
+        <h2>Add your  Medicinal Recipe</h2>
+    </div>
+    <form action="/recipes" method="Post">
+               
+        <div class="form-group">
+            <input  autofocus class="form-control" name="title" placeholder="Title" type="text" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" 
+                    rows="5" cols="33">
+            </textarea>
+
+        </div>
+        
+
+        <div class="form-group">
+            <input  autofocus class="form-control" name="more_info" placeholder="Addicional Information" type="text">
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" name="categoty" required>
+                <option disabled selected value>Category</option>
+
+                {% for item in category %}
+                    <option value="{{ item }}" 
+                    >{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+
+    
+
+{% endblock %}

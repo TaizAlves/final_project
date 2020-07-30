@@ -52,12 +52,10 @@ def index():
             'description' text NOT NULL,
             'more_info' text,
             'created_at' DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-            'advisor_id' INTEGER NOT NULL,
             'category_id' INTEGER NOT NULL,
             'user_id' INTEGER NOT NULL,
-            FOREIGN KEY (advisor_id) REFERENCES advisors(id) ON DELETE CASCADE ,
             FOREIGN KEY (category_id) REFERENCES category(id),
-            FOREIGN KEY (user_id) REFERENCES users(id)
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
         ''')
 
@@ -93,6 +91,7 @@ def register():
             if not password or rePassword != password :
                 return flash("password and confirmation must math")
             
+            status = request.form['status']
             # hash the password 
             hash = generate_password_hash(request.form['password'])
 
@@ -102,43 +101,22 @@ def register():
                     'name' text NOT NULL,
                     'email' text UNIQUE NOT NULL,
                     'hash' text NOT NULL,
+                    'status', text NOT NULL DEFAULT "client",
                     'created_at' DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP );
-                
-                CREATE TABLE IF NOT EXISTS 'advisors' (
-                    'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    'name' varchar(255) NOT NULL,
-                    'email' text UNIQUE NOT NULL,
-                    'hash' text NOT NULL,
-                    'created_at' DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP 
-                    );
                     ''')
-
-            # check if advisor ou user
-            if request.form['status']  == "advisor":
-                #insert into database table advisor
-                try: 
-                    cur.execute("INSERT INTO advisors (name, email, hash) VALUES (?,?,?)", (name, email, hash))
-                    con.commit()
-                except :
-                    flash("Error upload the info into the database")
-                    return redirect("/register")
-                    
-
-            if request.form['status']  == "client":
-                try:
-                    cur.execute("INSERT INTO users (name, email, hash) VALUES (?,?,?)", (name, email, hash))
-                    con.commit()
-                except :
-                    flash("Error upload the info into the database")
-                    return redirect("/register")
+            
+            try: 
+                cur.execute("INSERT INTO users (name, email, hash, status) VALUES (?,?,?, ?)", (name, email, hash, status))
+                con.commit()
+            except :
+                flash("Error upload the info into the database")
+                return redirect("/register")
                 
             
             if not email :
                 return flash("Email already exists")
 
-            print(cur)
-
-
+            
             # Display a flash message
             flash("Registered!")
             
@@ -173,7 +151,7 @@ def login():
             print(email)
 
             # Query database for username  // return as tuples
-            cur.execute("SELECT * FROM advisors WHERE email = (?)", email)
+            cur.execute("SELECT * FROM users WHERE email = (?)", email)
 
             if not email:
                 flash("Invalid email")
@@ -208,3 +186,26 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
+
+
+@app.route("/recipes", methods=["GET", "POST"])
+@login_required
+def recipes():
+    """Recipies"""
+    try:
+        if request.method == "GET":
+            cur.execute("SELECT name FROM category")
+            
+            category = []
+            for cat in cur:
+                print(cat)
+                category.append(cat)
+            
+            print(category)
+            return render_template("recipes.html", category = category)
+
+        else:
+            return redirect("/")
+    except Exception as e:
+            print(e)
+            return redirect("/recipes")
