@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request, redirect, flash, session
+from flask import Flask, render_template, request, redirect, flash, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -151,20 +151,32 @@ def login():
             
             # Query database for username  // return as tuples
             cur.execute("SELECT * FROM users WHERE email = (?)", email)
-
-            if not email:
+            
+            if not request.form['email'] :
                 flash("Invalid email")
-            for rows in cur:
-                #print(rows)
-                # Ensure username exists and password is correct
-                if not rows or not check_password_hash(rows[2], request.form["password"]):
-                    flash("must provide password")
 
+            for rows in cur:
+                print(rows[2])
+                print(request.form['email'])
+                # Ensure username exists and password is correct
+                if not check_password_hash(rows[3], request.form['password']):
+                    flash("must provide a valid email/password")
+                    return render_template("login.html")
+
+                
                 # Remember which user has logged in
+                
                 session["user_id"] = rows[0]
+                flash("login susscessfully")
+                return redirect("/")
+                
+            
+            flash("must provide a valid email/password")
+            return render_template("login.html")
+              
 
             # Redirect user to home page
-            return redirect("/")
+            
 
         except Exception as e:
             print(e)

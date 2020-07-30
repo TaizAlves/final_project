@@ -140,3 +140,13 @@ img.card-img-top{
     max-width: 30%;
     margin-bottom: auto;
 }
+
+
+.form-check-label{
+    margin-right: 34px;
+    margin-left: 20px
+}
+
+.form-check-input{
+    margin-left: 4px;
+}
