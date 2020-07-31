@@ -198,7 +198,7 @@ def logout():
     return redirect("/")
 
 
-@app.route("/recipes", methods=["GET", "POST"])
+@app.route("/recipes-add", methods=["GET", "POST"])
 @login_required
 def recipes():
     """Recipies"""
@@ -211,7 +211,7 @@ def recipes():
                 category.append(cat)
             
             #print(category)
-            return render_template("recipes.html", category = category)
+            return render_template("recipes/recipes.html", category = category)
 
         else:
 
@@ -230,27 +230,51 @@ def recipes():
 
     except Exception as e:
             print(e)
-            return redirect("/recipes")
+            return redirect("recipes/recipes")
 
-@app.route("/<int:idr>/show")
-def show(idr):
+@app.route("/recipes/<int:id>")
+def show(id):
     try:
-        #colocar como objeto no select !importante!!
         #user_id = [session["user_id"]]
         #print(user_id)
-        idr = [1]
-        cur.execute("SELECT recipes.title, recipes.description, recipes.more_info, recipes.created_at, recipes.user_id, category.name as category_name FROM recipes LEFT JOIN category ON recipes.category_id = category_id WHERE recipes.id = (?) GROUP BY recipes.id", idr)
+
+        #colocar como objeto no select !importante!!
+        id = [id]
+        cur.execute("SELECT recipes.title, recipes.description, recipes.more_info, recipes.created_at, recipes.user_id, category.name as category_name FROM recipes LEFT JOIN category ON recipes.category_id = category_id WHERE recipes.id = (?) GROUP BY recipes.id", id)
 
         recipe =[]
         for rec in cur:
             recipe.append(rec)
-        print(recipe)
-        print(recipe[0])
-        print(recipe[0][0])
+        
 
-        return render_template("show.html", recipe = recipe)
+        return render_template("recipes/show.html", recipe = recipe)
 
 
     except Exception as error:
         print(error)
-        return redirect(url_for("recipe"))
+        return redirect(url_for("recipes"))
+
+@app.route("/recipes")
+def allrecipes():
+    try:
+        #colocar como objeto no select !importante!!
+        #user_id = [session["user_id"]]
+        #print(user_id)
+        
+        cur.execute("SELECT users.name as author , recipes.id as recipe_id,recipes.title, recipes.description, recipes.more_info, recipes.created_at, recipes.user_id, category.name as category_name FROM recipes LEFT JOIN category ON recipes.category_id = category_id LEFT JOIN users ON users.id == recipes.user_id GROUP BY recipes.title")
+        recipes = cur.fetchall()
+        #print(recipes)
+        print(len(recipes))
+
+        for i in range(len(recipes)):
+           print(recipes[i][0])
+           print(recipes[i][2])
+            
+
+
+        return render_template("recipes/index.html", recipes = recipes, lenght= int(len(recipes)))
+
+
+    except Exception as error:
+        print(error)
+        return redirect(url_for("index"))

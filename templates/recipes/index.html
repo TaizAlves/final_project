@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Recipes
+{% endblock %}
+
+{% block main %}
+
+<div class="header">
+    <a class="button" href="/recipes-add">Add New</a>
+<div>
+        
+    <h2>All Recipes </h2>
+</div>
+<div class="card mb-3">
+
+    {% for i in range(2)%}
+    <div class="img-fluid" >
+        <img src="https://images.unsplash.com/photo-1592346469955-e22e21aab0be?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=525&q=60) no-repeat center center/cover" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+        <div id = "title">
+            <h5 class="card-title">{{i[2]}}</h5>
+        </div>
+        <div id="category">
+            <p class="card-text">category: {{recipes[i][7]}}</p>
+        </div>
+        <div id="author">
+            <p class="card-text"><small class="text-muted">by: {{recipes[i][0]}}</small></p>
+        </div>
+        <div id = "button">
+            <a href="/recipes/{{recipes[i][1]}}">ver</a>
+        </div>
+
+     {%endfor%}
+  </div>
+       
+
+    
+{% endblock %}

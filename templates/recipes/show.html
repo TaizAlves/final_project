@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Register
+    Recipe Detail
 {% endblock %}
 
 {% block main %}
@@ -48,7 +48,11 @@
        
         <button class="btn btn-dark"onclick="goBack()">Go Back</button>
        
-
+        <script>
+            function goBack() {
+              window.history.back();
+            }
+        </script>
     
 
 {% endblock %}
