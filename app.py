@@ -156,14 +156,13 @@ def login():
                 flash("Invalid email")
 
             for rows in cur:
-                print(rows[2])
-                print(request.form['email'])
+                #print(rows[2])
+                #print(request.form['email'])
                 # Ensure username exists and password is correct
                 if not check_password_hash(rows[3], request.form['password']):
                     flash("must provide a valid email/password")
                     return render_template("login.html")
-
-                
+           
                 # Remember which user has logged in
                 
                 session["user_id"] = rows[0]
@@ -232,3 +231,26 @@ def recipes():
     except Exception as e:
             print(e)
             return redirect("/recipes")
+
+@app.route("/<int:idr>/show")
+def show(idr):
+    try:
+        #colocar como objeto no select !importante!!
+        #user_id = [session["user_id"]]
+        #print(user_id)
+        idr = [1]
+        cur.execute("SELECT recipes.title, recipes.description, recipes.more_info, recipes.created_at, recipes.user_id, category.name as category_name FROM recipes LEFT JOIN category ON recipes.category_id = category_id WHERE recipes.id = (?) GROUP BY recipes.id", idr)
+
+        recipe =[]
+        for rec in cur:
+            recipe.append(rec)
+        print(recipe)
+        print(recipe[0])
+        print(recipe[0][0])
+
+        return render_template("show.html", recipe = recipe)
+
+
+    except Exception as error:
+        print(error)
+        return redirect(url_for("recipe"))

@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <div>
+        
+        <h2>Recipe </h2>
+    </div>
+    <div class="form-group">
+        <img class="img-fluid" alt="Responsive image" src="https://images.unsplash.com/photo-1592346469955-e22e21aab0be?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=525&q=60) no-repeat center center/cover" >    
+               
+        <div class="form-group">
+            <div>Title</div>
+            <div class="form-control">{{recipe[0][0]}}</div>          
+        </div>
+        <div class="form-group">
+            <div>Description</div>
+            <textarea class="form-control" name="description" 
+            rows="5" cols="33">
+            {{recipe[0][1]}}
+            </textarea>
+        </div>
+
+        <div class="form-group">
+            <div>More information</div>
+            <div class="form-control">{{recipe[0][2]}}</div>
+        </div>
+
+        <div class="form-group">
+            <div>Category</div>
+            <div class="form-control">{{recipe[0][5]}}</div>
+        </div>
+
+        <div class="form-group">
+            <div>Author</div>
+            <div class="form-control">{{recipe[0][4]}}</div>
+        </div>
+
+        <div class="form-group">
+            <div>Publish at</div>
+            <div class="form-control">{{recipe[0][3]}}</div>
+        </div>
+
+       
+        <button class="btn btn-dark"onclick="goBack()">Go Back</button>
+       
+
+    
+
+{% endblock %}
