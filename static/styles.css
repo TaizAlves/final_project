@@ -150,3 +150,32 @@ img.card-img-top{
 .form-check-input{
     margin-left: 4px;
 }
+
+
+/*  RECIPES INDEX  */
+
+a.button{
+    padding: 8px 60px;
+    background-color: darkgreen;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    
+}
+
+
+.add-recip {
+    display: grid;
+    grid-template-columns: 1fr 188px;
+    margin: 0px 8px 24px 4px;
+    justify-content: center;
+}
+
+h2.recip_title{
+    font-weight: 400;
+    color: rgb(37, 70, 37);
+}
+
+
+
+
