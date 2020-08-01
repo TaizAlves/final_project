@@ -14,22 +14,28 @@
 
 <div class="card w-100">
     
-    {% for i in range(2)%}
+    
+    {% for i in range (nr)%}
     
     <div class="card-body">
 
-        <div id = "title">
-            <h5 class="card-title">{{recipes[i][2]}}</h5>
+        <div>
+
+            <h5 class="title">{{recipes[i][2]}}</h5>
+        
+        
+            <p class="recip-text">category: {{recipes[i][7]}}</p>
+        
+        
+            <p><small class="text-muted">author: {{recipes[i][0]}}</small></p>
         </div>
-        <div id="category">
-            <p class="card-text">category: {{recipes[i][7]}}</p>
+
+        <div>
+            <a class="button-see" href="/recipes/{{recipes[i][1]}}">ver</a>
+
         </div>
-        <div id="author">
-            <p class="card-text"><small class="text-muted">author: {{recipes[i][0]}}</small></p>
-        </div>
-        <div id = "button">
-            <a class="btn btn-primary" href="/recipes/{{recipes[i][1]}}">ver</a>
-        </div>
+        
+        
 
     </div>
     {%endfor%}

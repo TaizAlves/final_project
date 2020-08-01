@@ -132,6 +132,13 @@ img.card-img-top{
     color: black;
 }
 
+/* REGISTER */
+
+form div.form-group :nth-child(1){
+    margin-top: 12px;
+}
+
+
 /*  LOG IN */
 
 #loginform {
@@ -144,38 +151,84 @@ img.card-img-top{
 
 .form-check-label{
     margin-right: 34px;
-    margin-left: 20px
+    margin-left: 20px;  
+    margin-top: 6px;
 }
 
 .form-check-input{
     margin-left: 4px;
+    
 }
 
 
 /*  RECIPES INDEX  */
 
 a.button{
-    padding: 8px 60px;
-    background-color: darkgreen;
-    color: white;
+    padding: 10px 60px;
+    background-color: rgba(194, 235, 194, 0.808);
+    color: gray;
     border-radius: 4px;
     font-size: 16px;
+    max-width: 185px;
+    margin-right: 20px;
     
 }
 
 
 .add-recip {
     display: grid;
-    grid-template-columns: 1fr 188px;
-    margin: 0px 8px 24px 4px;
+    grid-template-columns: 1fr 290px;
+    margin: 0px 8px 24px 32px;
     justify-content: center;
 }
 
 h2.recip_title{
-    font-weight: 400;
-    color: rgb(37, 70, 37);
+    color:darkblue;
 }
 
+.card-body{
+    display: grid;
+    grid-template-columns: 1fr 435px;
+    align-items: center;
+    justify-content: center;
+    border-bottom: darkred;
+    padding: 32px;
 
+    box-shadow: 3px 1px 6px -4px black;
+    border: 2px solid whitesmoke;
+}
 
+a.button-see{
+    color: white;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    padding: 14px 60px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-left: 196px;
+}
 
+h5.title{
+    margin-bottom: 4px;
+
+}
+p.recip-text{
+    margin-bottom: 0px;
+}
+
+small.text-muted{
+    text-transform: capitalize;
+    margin-top: 0;
+}
+
+/* SHOW recipe*/
+
+img.img-fluid{
+    margin: 32px 366px 32px;
+    max-width: 35%;
+
+}
+
+div.show{
+    color: darkblue;
+}
