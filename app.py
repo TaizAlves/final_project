@@ -226,11 +226,11 @@ def recipes():
             
             
             flash("Thank you! New recipe add.")
-            return redirect("/")
+            return redirect("/recipes", category_id)
 
     except Exception as e:
             print(e)
-            return redirect("recipes/recipes")
+            return redirect("/recipes")
 
 @app.route("/recipes/<int:id>")
 def show(id):
@@ -240,17 +240,18 @@ def show(id):
 
         #colocar como objeto no select !importante!!
         id = [id]
-        cur.execute("SELECT recipes.title, recipes.description, recipes.more_info, recipes.created_at, users.name as user_name, category.name as category_name FROM recipes LEFT JOIN category ON recipes.category_id = category_id LEFT JOIN users ON users.id = recipes.user_id WHERE recipes.id = (?) GROUP BY recipes.id", id)
+        cur.execute("SELECT recipes.title, recipes.description, recipes.more_info, recipes.created_at, users.name as user_name, recipes.category_id, category.id FROM recipes LEFT JOIN category ON recipes.category_id = category_id LEFT JOIN users ON users.id = recipes.user_id WHERE recipes.id = (?) GROUP BY recipes.id", id)
 
         recipe =cur.fetchall()
-          
+        
+        #print(recipe)
 
         return render_template("recipes/show.html", recipe = recipe)
 
 
     except Exception as error:
         print(error)
-        return redirect(url_for("recipes"))
+        return redirect(url_for("allrecipes"))
 
 @app.route("/recipes")
 def allrecipes():

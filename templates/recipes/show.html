@@ -7,8 +7,10 @@
 {% block main %}
 
 
-    <div>
-        <img class="img-fluid" alt="Responsive image" src="https://images.unsplash.com/photo-1592346469955-e22e21aab0be?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=525&q=60) no-repeat center center/cover" > 
+
+
+    <div >
+        <img class="img-fluid" alt="Responsive image" src="" > 
         
     </div>
   
@@ -19,7 +21,7 @@
             <div class="form-control">{{recipe[0][0]}}</div>          
         </div>
         <div class="form-group">
-            <div class= "show">Description</div>
+            <div class="show">Description</div>
             <textarea class="form-control" name="description" 
             rows="5" cols="33">
             {{recipe[0][1]}}
@@ -28,12 +30,32 @@
 
         <div class="form-group">
             <div class= "show">More information</div>
-            <div class="form-control">{{recipe[0][2]}}</div>
+            <div class="form-control" >{{recipe[0][2]}}</div>
+            
         </div>
 
         <div class="form-group">
             <div class= "show">Category</div>
-            <div class="form-control">{{recipe[0][5]}}</div>
+            <div class="form-control">
+                
+                <p id="categ" value="{{recipe[0][5]}}" >
+                    {% if recipe[0][5]== 1%} 
+                    <span>essencial oil </span>
+                    
+                    {%elif recipe[0][5] == 2%}
+                    <span>herbal medicine</span>
+                    
+                    {% elif recipe[0][5]== 3 %} 
+                    <span>Bach Flower Therapy</span>  
+                    
+                    {% elif recipe[0][5] == 5 %}
+                    <span>Others</span> 
+                    
+                    {% else  %} 
+                    <span>Homeopathy</span> 
+                    {%endif%}
+                </p>
+            </div>
         </div>
 
         <div class="form-group">
@@ -48,6 +70,7 @@
 
        
         <button class="btn btn-dark"onclick="goBack()">Go Back</button>
+  
        
         <script>
             function goBack() {
@@ -55,5 +78,6 @@
             }
         </script>
     
+        
 
 {% endblock %}
