@@ -251,7 +251,7 @@ def show(id):
 
     except Exception as error:
         print(error)
-        return redirect(url_for("allrecipes"))
+        return redirect("/recipes")
 
 @app.route("/recipes")
 def allrecipes():
@@ -266,6 +266,53 @@ def allrecipes():
         
         return render_template("recipes/index.html", recipes = recipes, nr= len(recipes) )
 
+
+    except Exception as error:
+        print(error)
+        return redirect(url_for("index"))
+
+@app.route("/add-product", methods=["GET", "POST"])
+@login_required
+def product():
+    """Recipies"""
+    try:
+        if request.method == "GET":
+            user_id = [session["user_id"]]
+            cur.execute("SELECT status FROM users WHERE id =(?)", user_id)
+            status = cur.fetchall()
+            
+            status = status[0][0]
+            
+            
+            #print(status)
+            if status != "company":
+                flash("SORRY! INTERNAL ACCESS ONLY")
+                return redirect("/")
+            else:
+
+                cur.execute("SELECT name, id  FROM category ORDER BY name")
+                
+                category = cur.fetchall()      
+                
+                #print(category)
+                return render_template("product/product.html", category = category, status= status)
+
+        else:
+            
+
+            user_id = session["user_id"]
+            title = request.form['title']
+            description = request.form['description']
+            avatar_url = request.form['avatar_url']
+            category_id = request.form['category']
+
+            cur.execute("INSERT INTO products (img,title, description, user_id, category_id) VALUES (?,?,?,?,?)", (avatar_url, title, description, user_id, category_id)) 
+            con.commit()
+            
+            
+            flash("Thank you! New recipe add.")
+            return redirect("/")
+            
 
     except Exception as error:
         print(error)

@@ -35,19 +35,21 @@ cur.executescript('''
         ALTER TABLE 'recipes' ADD FOREIGN KEY ('user_id') REFERENCES 'users' ('id');
         ALTER TABLE 'products' ADD FOREIGN KEY ('category_id') REFERENCES 'category' ('id')
 
-        CREATE TABLE IF NOT EXISTS 'produts' (
+        CREATE TABLE IF NOT EXISTS 'products' (
                     'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 					'img' text,
                     'title' text NOT NULL,
 					'description' text NOT NULL,
+                    'user_id' INTEGER NOT NULL,
                     'category_id' INTEGER NOT NULL,
 					FOREIGN KEY (category_id) REFERENCES category(id)
+					FOREIGN KEY (user_id) REFERENCES users(id)
 					);
         CREATE TABLE IF NOT EXISTS 'sales' (
                     'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     'product_id' INTEGER NOT NULL,
 					'user_id' INTEGER NOT NULL,
-					FOREIGN KEY (product_id) REFERENCES produts(id),
+					FOREIGN KEY (product_id) REFERENCES products(id),
 					FOREIGN KEY (user_id) REFERENCES users(id)
 					
 					);

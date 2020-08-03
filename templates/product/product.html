@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    {% if status == "company" %}
+    <div>
+        <h2>Product - Register</h2>
+    </div>
+    <form action="/add-product" method="Post">
+        
+        <div class="form-group">
+            <input  autofocus class="form-control" name="avatar_url" placeholder="Imagem - http://" type="url">
+        </div>
+        <div class="form-group">
+            <input  autofocus class="form-control" name="title" placeholder="Title" type="text" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" 
+                rows="5" cols="33">
+            </textarea>
+
+        </div>
+        
+
+        <div class="form-group">
+            <select class="form-control" name="category" required>
+                <option disabled selected value>Category</option>
+                {% for category in category %}
+                    <option value="{{ category[1] }}" 
+                    {% if category[0]== category[1] %} selected {%endif%}
+                    >{{ category[0] }}</option>
+                {% endfor %}
+               
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+        
+    </form>
+
+    {%endif%}
+
+    
+
+{% endblock %}
