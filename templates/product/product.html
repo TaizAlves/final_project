@@ -7,7 +7,7 @@
 {% block main %}
     {% if status == "company" %}
     <div>
-        <h2>Product - Register</h2>
+        <h2>Add a new Product</h2>
     </div>
     <form action="/add-product" method="Post">
         
@@ -25,7 +25,6 @@
 
         </div>
         
-
         <div class="form-group">
             <select class="form-control" name="category" required>
                 <option disabled selected value>Category</option>
@@ -36,6 +35,10 @@
                 {% endfor %}
                
             </select>
+        </div>
+
+        <div class="form-group">
+            <input  autofocus class="form-control" name="price" placeholder="price" type="number" required>
         </div>
 
         <button class="btn btn-primary" type="submit">Save</button>

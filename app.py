@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, flash, session, url
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
-from utils import login_required
+from utils import login_required, usd
 
 
 
@@ -260,9 +260,9 @@ def allrecipes():
         #user_id = [session["user_id"]]
         #print(user_id)
         
-        cur.execute("SELECT users.name as author , recipes.id as recipe_id,recipes.title, recipes.description, recipes.more_info, recipes.created_at, recipes.user_id, category.name as category_name FROM recipes LEFT JOIN category ON recipes.category_id = category_id LEFT JOIN users ON users.id == recipes.user_id GROUP BY recipes.title")
+        cur.execute("SELECT users.name as author , recipes.id as recipe_id,recipes.title, recipes.description, recipes.more_info, recipes.created_at, recipes.user_id, recipes.category_id  as category_name FROM recipes LEFT JOIN category ON recipes.category_id = category_id LEFT JOIN users ON users.id == recipes.user_id GROUP BY recipes.title")
         recipes = cur.fetchall()
-        #print(recipes)
+        print(recipes[0][7])
         
         return render_template("recipes/index.html", recipes = recipes, nr= len(recipes) )
 
@@ -299,14 +299,14 @@ def product():
 
         else:
             
-
             user_id = session["user_id"]
             title = request.form['title']
             description = request.form['description']
+            price = request.form['price']
             avatar_url = request.form['avatar_url']
             category_id = request.form['category']
 
-            cur.execute("INSERT INTO products (img,title, description, user_id, category_id) VALUES (?,?,?,?,?)", (avatar_url, title, description, user_id, category_id)) 
+            cur.execute("INSERT INTO products (img,title, description, user_id, category_id) VALUES (?,?,?,?,?)", (avatar_url, title, description,price, user_id, category_id)) 
             con.commit()
             
             
@@ -317,3 +317,64 @@ def product():
     except Exception as error:
         print(error)
         return redirect(url_for("index"))
+
+
+@app.route("/products")
+def allproducts():
+    try:
+        #colocar como objeto no select !importante!!
+        #user_id = [session["user_id"]]
+        #print(user_id)
+        
+        cur.execute("SELECT products.img, products.title, products.description, products.price, products.category_id, products.id FROM products LEFT JOIN category ON products.category_id = category_id GROUP BY products.id")
+        products = cur.fetchall()
+        #print(products)
+        
+        
+        return render_template("product/index.html", products = products, nr= len(products) )
+
+
+    except Exception as error:
+        print(error)
+        return redirect(url_for("index"))
+
+
+
+@app.route("/products/<int:id>")
+def oneProduct(id):
+    """Buy products"""
+
+    try:
+        
+        id = [id]
+        cur.execute("SELECT * FROM products WHERE id =(?)", id)
+
+        product =cur.fetchall()
+        
+        return render_template("product/show.html", product= product)
+        
+
+    except Exception as error:
+        print(error)
+        return redirect("/products")
+
+@app.route("/products/<int:id>", methods=["POST"])
+@login_required
+def buy(id):
+    """Buy products"""
+
+    try:        
+        ## insert the transaction info at database
+            
+        user_id = session["user_id"]
+        product_id = request.form['product_id']
+        quantity= request.form['quantity']
+        cur.execute("INSERT INTO sales (user_id, product_id, quantity) VALUES(?,?,?)",( user_id,product_id , quantity))
+        con.commit()
+        flash("Bought!")
+
+        return redirect("/products")
+
+    except Exception as error:
+        print(error)
+        return redirect("/products")

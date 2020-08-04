@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Products
+{% endblock %}
+
+{% block main %}
+
+
+<div class="product-wrapper">
+    
+    {% for i in range (nr)%}
+    <div class= "item">
+
+        <div class="img-product">
+            <img src="{{products[i][0]}}" class="card-img-top" alt="{{products[i][1]}}">
+        </div> 
+
+        <div class="sub-item">
+
+            <h5 class="title">{{products[i][1]}}</h5>
+
+              
+            <p class="recip-text">Category: 
+                {% if products[i][4]== 1%} 
+                <span>essencial oil </span>
+                
+                {%elif products[i][4] == 2%}
+                <span>herbal medicine</span>
+                
+                {% elif products[i][4]== 3 %} 
+                <span>Bach Flower Therapy</span>  
+                
+                {% elif products[i][4] == 5 %}
+                <span>Others</span> 
+                
+                {% else  %} 
+                <span>Homeopathy</span> 
+                {%endif%}
+            </p>
+            <p class="recip-text">price: $ {{products[i][3] }}</p>
+            
+        </div>   
+        <div class= "button-product">
+            
+            <a class="button-see" href="/products/{{products[i][5]}}">ver</a>
+            <form action="/products/{{products[i][5]}}" method="post">
+                <input type="hidden" name="product_id" value="{{products[i][5]}}"/>
+                <input type="number" name="quantity" min="1" placeholder="0" style="width: 50px" required />
+                <button class="btn btn-sm btn-primary" type="submit">Buy</button>
+            </form>
+            
+            
+            
+        </div>
+         
+     </div> 
+    {%endfor%}
+</div>
+ 
+
+       
+     
+{% endblock %}

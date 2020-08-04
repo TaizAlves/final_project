@@ -24,7 +24,22 @@
             <h5 class="title">{{recipes[i][2]}}</h5>
         
         
-            <p class="recip-text">category: {{recipes[i][7]}}</p>
+            <p class="recip-text">category: 
+                {% if recipes[i][7]== 1%} 
+                <span>essencial oil </span>
+                
+                {%elif recipes[i][7] == 2%}
+                <span>herbal medicine</span>
+                
+                {%elif recipes[i][7] == 3 %} 
+                <span>Bach Flower Therapy</span>  
+                
+                {% elif recipes[i][7] == 5 %}
+                <span>Others</span>     
+                {% else  %} 
+                <span>Homeopathy</span> 
+                {%endif%}
+                </p>
         
         
             <p><small class="text-muted">author: {{recipes[i][0]}}</small></p>

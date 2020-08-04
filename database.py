@@ -40,6 +40,8 @@ cur.executescript('''
 					'img' text,
                     'title' text NOT NULL,
 					'description' text NOT NULL,
+                    'price' REAL NOT NULL ,
+                    'quantity' INTEGER DEFAULT 10,
                     'user_id' INTEGER NOT NULL,
                     'category_id' INTEGER NOT NULL,
 					FOREIGN KEY (category_id) REFERENCES category(id)
@@ -49,9 +51,10 @@ cur.executescript('''
                     'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     'product_id' INTEGER NOT NULL,
 					'user_id' INTEGER NOT NULL,
+                    'quantity' INTEGER NOT NULL,
+                    'created_at' DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					FOREIGN KEY (product_id) REFERENCES products(id),
 					FOREIGN KEY (user_id) REFERENCES users(id)
-					
 					);
         ''')
 

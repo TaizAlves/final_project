@@ -10,7 +10,7 @@ footer{
 
 /*  HEADER */
 header, footer{
-    background-color: rgba(194, 235, 194, 0.808);
+    background-color: rgba(159, 197, 159, 0.808);
     color: white;
     font-weight: bold;
 
@@ -165,7 +165,7 @@ form div.form-group :nth-child(1){
 
 a.button{
     padding: 10px 60px;
-    background-color: rgba(194, 235, 194, 0.808);
+    background-color: rgba(159, 197, 159, 0.808);
     color: gray;
     border-radius: 4px;
     font-size: 16px;
@@ -231,4 +231,56 @@ img.img-fluid{
 
 div.show{
     color: darkblue;
+}
+
+/* products */
+
+.product-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+    position: relative;
+}
+
+.item {
+    display: grid;
+    grid-template-rows: 165px 1fr 60px;
+    padding: 32px 32px;
+    grid-gap: 20px;
+}
+
+img.card-img-top {
+    max-height: 100%;
+}
+
+.sub-item{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2px;
+}
+
+.button-product{
+
+    display: inline-block;
+}
+div.button-product a.button-see{
+    color: white;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-left: 0px;
+
+}
+
+div.button-product button.btn.btn-sm.btn-success{
+
+    text-align: justify;
+    margin-left: 127px;
+    padding: 10px 29px;
+    background-color: rgba(92, 150, 92, 0.808);
+    border-color: rgba(159, 197, 159, 0.808);
+    
+    
 }
