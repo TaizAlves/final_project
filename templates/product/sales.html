@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}
+    Sales Report
+{% endblock %}
+
+
+{% block main %}
+<div class="card table-container">
+
+        <table width="100%">
+            
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Customer Contact</th>
+        </tr>
+    
+    </thead>
+
+    <tbody>
+        
+
+    {%for i in range (nrs) %}
+        <tr>
+            <td>{{sales[i][0]}}</td>
+            <td >{{sales[i][1]}}</td>  
+            <td >{{sales[i][2]}}</td>  
+            <td >{{sales[i][3]}}</td>  
+            <td >{{sales[i][4]}}</td>  
+            <td ><span>{{sales[i][5]}} email: </span>{{sales[i][6]}} </td>       
+        </tr>
+    {%endfor%}
+    
+ 
+        </tbody>
+        
+    </table>
+
+    
+
+</div>
+{% endblock %}
+
+

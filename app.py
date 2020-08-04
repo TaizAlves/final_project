@@ -392,3 +392,62 @@ def buy(id):
     except Exception as error:
         print(error)
         return redirect("/products")
+
+@app.route("/products/cart")
+@login_required
+def cart():
+    try:
+        #colocar como objeto no select !importante!!
+        user_id = [session["user_id"]]
+        #print(user_id)
+        
+        cur.execute("SELECT products.img,products.title, products.price,sales.quantity,sales.created_at,users.status , products.id as productId FROM sales JOIN products ON products.id = sales.product_id JOIN users ON sales.user_id = users.id WHERE products.id = sales.product_id AND users.id = (?)", user_id)
+        cart_client= cur.fetchall()
+        print(cart_client)
+        print(cart_client[0][5])
+        
+        
+        cur.execute("SELECT status FROM users WHERE id = (?)", user_id)
+        status = cur.fetchall()
+        status = status[0][0] 
+
+        if status == "companny":
+            return redirect("/sales")
+
+        else:
+            
+            return render_template("product/cart.html", cart_client = cart_client, nr = len(cart_client) )
+
+        
+
+    except Exception as error:
+        print(error)
+        return redirect("/products")
+
+@app.route("/sales")
+@login_required
+def sales():
+    try:       
+
+        cur.execute("SELECT products.id,products.title, products.price,sales.quantity,sales.created_at, users.name, users.email, users.status FROM sales JOIN products ON products.id = sales.product_id JOIN users ON sales.user_id = users.id WHERE products.id = sales.product_id ")
+        sales = cur.fetchall()
+        
+        
+        user_id = [session["user_id"]]
+        cur.execute("SELECT status FROM users WHERE id = (?)", user_id)
+        status = cur.fetchall()
+        status = status[0][0] 
+        
+
+        if status == "company":
+            return render_template("product/sales.html", sales = sales, nrs = len(sales))
+
+        else:
+            
+            return redirect("/products/cart")
+
+        
+
+    except Exception as error:
+        print(error)
+        return redirect("/products")

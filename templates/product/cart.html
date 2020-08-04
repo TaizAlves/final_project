@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block main %}
+<div class="card table-container">
+
+        <table width="100%">
+            
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Date</th>
+        </tr>
+    
+    </thead>
+
+    <tbody>
+        
+
+    {% for i in range (nr)%}
+        <tr>
+            <td>
+                <span style= "background-image: url({{cart_client[i][0]}})"></span>
+            {{cart_client[i][1]}}</td>
+            <td >{{cart_client[i][2]}}</td>  
+            <td >{{cart_client[i][3]}}</td>  
+            <td ><strong>{{cart_client[i][3] * cart_client[i][2]}} </strong></td>  
+            <td >{{cart_client[i][4]}}</td>  
+            <td><a href="/products/{{cart_client[i][6]}}">ver</a></td>
+        </tr>
+    {%endfor%}
+    
+ 
+        </tbody>
+        
+    </table>
+
+    
+
+</div>
+{% endblock %}
+
+
