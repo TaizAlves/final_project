@@ -325,7 +325,8 @@ def allproducts():
         #colocar como objeto no select !importante!!
         #user_id = [session["user_id"]]
         #print(user_id)
-        
+
+                
         cur.execute("SELECT products.img, products.title, products.description, products.price, products.category_id, products.id FROM products LEFT JOIN category ON products.category_id = category_id GROUP BY products.id")
         products = cur.fetchall()
         #print(products)
@@ -350,8 +351,9 @@ def oneProduct(id):
         cur.execute("SELECT * FROM products WHERE id =(?)", id)
 
         product =cur.fetchall()
-        
-        return render_template("product/show.html", product= product)
+
+                
+        return render_template("product/show.html", product= product, quantity= product[0][7])
         
 
     except Exception as error:
@@ -364,8 +366,20 @@ def buy(id):
     """Buy products"""
 
     try:        
-        ## insert the transaction info at database
-            
+        ## check for the quantity total
+        productid = [id]
+        cur.execute("SELECT products.quantity FROM products WHERE id = (?)", productid)
+        tot = cur.fetchall()
+        total = tot[0][0]
+        print(total)
+
+        # UPDATE quantity
+        updated_quantity = total - int(request.form['quantity'])
+        
+        cur.execute("UPDATE products SET quantity = (?) WHERE id =(?)", (updated_quantity,id))
+
+        
+
         user_id = session["user_id"]
         product_id = request.form['product_id']
         quantity= request.form['quantity']

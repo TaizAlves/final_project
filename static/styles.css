@@ -284,3 +284,20 @@ div.button-product button.btn.btn-sm.btn-success{
     
     
 }
+
+.fields {
+    display: grid;
+    grid-template-columns: 1fr ;
+    align-items: center;
+    grid-gap: 24px;
+    padding: 10px 32px;
+    margin: 24px;
+    
+}
+
+img.img-oneproduct{
+
+    width: 45%;
+    height: 80%;
+    object-fit: contain;
+}

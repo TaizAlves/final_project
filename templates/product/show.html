@@ -6,29 +6,27 @@
 
 {% block main %}
 
-    <div >
-        <img class="img-fluid" alt="Responsive image" src="{{product[0][1]}}" > 
-        
-    </div>
-  
-    <div class="form-group">
-                     
-        <div class="form-group">
-            <div class= "show">Title</div>
-            <div class="form-control">{{product[0][2]}}</div>          
-        </div>
-        <div class="form-group">
-            <div class="show">Description</div>
-            <textarea class="form-control" name="description" 
-            rows="5" cols="33">
-            {{product[0][3]}}
-            </textarea>
-        </div>
+<section class="card_container ">
+    <div class="fields">
 
-       
-        <div class="form-group">
+        <div class="prod_item">
+                    
+            <div class="card-img-top">
+                <img class = "img-oneproduct" src="{{product[0][1]}}" alt="">
+            </div>
+            <div class="sub">     
+        
+            <div class= "show">Title</div>
+            <p class="card-text">{{product[0][2]}}</div>          
+        
+        
+            <div class="show">Description</div>
+            <p class="card-text"> {{product[0][3]}}</p>
+        
+
+      
             <div class= "show">Category</div>
-            <div class="form-control">
+            
                 
                 <p id="categ" value="{{product[0][5]}}" >
                     {% if product[0][5]== 1%} 
@@ -47,24 +45,28 @@
                     <span>Homeopathy</span> 
                     {%endif%}
                 </p>
-            </div>
-        </div>
-
-        <div class="form-group">
+            
+       
+        
             <div class= "show">Price</div>
-            <div class="form-control"><strong>Price: {{product[0][6]}}</strong> </div>
-        </div>
+            <p class="card-text"><strong>Price: {{product[0][6]}}</strong> </p>
+        
 
         
         <a class="button-see" href="/products">continuar comprando</a>
-             
-        <form action="/products/{{product[0][0]}}" method="post">
-            <input type="hidden" name="product_id" value="{{product[0][0]}}"/>
-            <input type="number" name="quantity" min="1" placeholder="0" style="width: 50px" required />
-            <button class="btn btn-sm btn-primary" type="submit">Buy</button>
-        </form>
-  
-       
+        {% if quantity > 0 %}
+            <form action="/products/{{product[0][0]}}" method="post">
+                <input type="hidden" name="product_id" value="{{product[0][0]}}"/>
+                <input type="number" name="quantity" min="1" placeholder="0" style="width: 50px" required />
+                <button class="btn btn-sm btn-sucess" type="submit">Buy</button>
+            </form>
+        {% else %}
+            <div class= "show">Quantity</div>
+            <p class="card-text"><strong>Produto Indisponivel</strong> </p>
+        {%endif%}
+    </div>
+</div>
+</section>
         <script >
             const buy= document.querySelector(".btn.btn-sm.btn-sucess")
             buy.addEventListener("submit", function(event){
