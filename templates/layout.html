@@ -32,15 +32,17 @@
 
         <header>
 
-            <div class="cont">
-                <a href="/">
+            <div class="page-header">
+                <div class="logo-header">
                     <div class="logo">
+                        <a href="/">
+                            <img src="/static/images/logo.jpg" alt="logo">
+                        </a>
                             
-                        <h1>Natural Healing</h1>         
-                    </div>
-                </a>
-                  
-                <form class= "search" method="GET" action="/products/search">
+                            <h1>Natural Healing</h1>         
+                        </div>
+                </div>
+                <form class= "search" method="POST" action="/products/search">
                     <input 
                         type="text" 
                         name="filter" 
@@ -49,15 +51,15 @@
                         >
                 </form>
                     
-            </div>
                     
+            </div>               
             
         </header>
 
         <ul class="nav justify-content-center">
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Herbal Medicine</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/products">Products</a>

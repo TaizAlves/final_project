@@ -13,66 +13,148 @@ header, footer{
     background-color: rgba(159, 197, 159, 0.808);
     color: white;
     font-weight: bold;
-
     width: 100%;
-    padding: 22px 0;
-
     text-align: center;
 
 }
 
 footer{
-    padding: 16px 0;
-}
-
-
-header div.cont{
-    display: grid;
-    grid-template-columns: 1fr 220px ;
+    padding: 1.4rem 0;
     align-items: center;
-    grid-gap: 20px;
+    justify-content: center;
 }
 
-header div.cont a {
-    justify-self: center;
+main .container.p-4{
+    position: relative;
+}
+
+/* HEADER */
+
+.page-header {
+    display: flex;
+    flex-direction: column;
+    max-height: 15rem;
+    
+
+}
+.page-header .logo-header{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 0;
+}
+
+.page-header .logo-header a {
+    height: 3rem;
+    transition: opacity 0.2s;
 }
 
 
+header div.logo-header a:hover {
+    opacity: 0.6;
+    text-decoration: none;
+}
 
-/*  LOGO */
 
-.cont a {
+header .logo-header a {
     text-decoration: none;
 
 }
 
-.logo{
-    margin-right: -197px
-}
 
 .logo h1{
     color: white;
-    font-size: 36px;
-    line-height: 46px;
+    font-size: 2.4rem;
     font-weight: bold;
     align-self: center;
-    padding: 0 18px;
+    padding: 0 2px;
+    line-height: 4.2rem;
     
+}
+
+.logo img{
+    height: 5.6rem;
+    object-fit: contain;
+    border-radius: 50%;
 }
 
 
 
 /*  HEADER SEARCH */
-.search{
-    margin-right: 32px;
+.page-header .search{
+    width: 90%;
+    position: relative;
+    margin: 4.9rem auto; 
+    
 }
 
 .search input{
-    width: 100%;
-    padding: 4px 8px;
+    max-width: 30rem;
+    padding: 0.4rem 0.6rem;
     border-radius: 2px;
-    font-size: 14px;   
+    font-size: 0.9rem;   
 
+}
+
+@media (min-width: 700px) {
+    .page-header{
+        height: 100px;
+        
+        display: flex;
+        flex-direction: row;
+        position: relative;
+    }
+    .page-header .logo-header{
+        max-width: 940px;
+    }
+    .page-header .logo {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    header div.logo-header{
+        
+        align-items: center;
+    }
+
+    .page-header .logo-header a{
+        display: flex;
+        align-items: center;
+        margin: 1px 130px;
+        height: 4rem;
+    
+    }
+    .logo img{
+        height: 4rem;
+        margin-bottom: 20px;
+
+    }
+
+    header .logo-header h1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+
+    }
+
+    .page-header .search{
+        flex: 1;
+        margin: 0 auto;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+    }
 }
 
 /*   NAV  layout */
@@ -80,20 +162,23 @@ header div.cont a {
 .nav.justify-content-center{
     background-color:whitesmoke;
     width: 100%;
-    padding: 8px 0;
-
+    
     font-size: 22px;
 
     text-align: center;
     justify-content: space-around;
 
     border-top:  rgba(162, 199, 162, 0.808);
+    height: 51px;
+    flex-direction: row;
+    align-items: center;
 
 }
 
 
 a.nav-link{
     color: indigo;
+    transition: 0.2s;
 
 }
 
@@ -111,11 +196,64 @@ img.card-img-top{
 
 
 /*  INDEX  */
-.card,
-.col-md-8 .card-body{
-    color: slategrey;
+
+.container{
+    width: 100vw;
+    
+    max-width: 940px;
+    
+}
+
+.container .card.mb-3{
+    margin-top:1rem;
+    border: 0;
 
 }
+
+.card.mb-3 .wrapper-content{
+    display: grid;
+    grid-template-rows: 18rem 23rem;
+}
+
+
+.img-index {
+    display: flex;
+    flex-direction: column;
+    height: 17rem;
+    flex: 1;
+}
+
+.img-index img {
+    display: flex;
+    flex: 1;
+    max-width: 90vw;
+    max-height: 16rem;
+    object-fit: cover;
+    position: absolute;
+}
+
+.wrapper-content .content{
+    display: grid;
+    
+    margin: auto 1rem;
+    grid-gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    max-width: 920px;
+    
+
+}
+
+    .wrapper-content .content p{
+        display: flex;
+        max-height: 17rem;
+        flex: 1;
+        line-height: 1.8rem;
+        font-size: 1rem;
+        align-items: center;
+       justify-content: center;
+    }
+
 
 
 .last_updated{
@@ -132,6 +270,21 @@ img.card-img-top{
     color: black;
 }
 
+.featured{
+    display: grid;
+    grid-template-rows: 13rem 5rem 1rem;
+
+    max-width: 20rem;
+  
+
+}
+
+img.featured-img{
+    width: 14vw;
+    max-height: 14vw;
+    object-fit: cover;
+
+}
 /* REGISTER */
 
 form div.form-group :nth-child(1){
@@ -240,6 +393,7 @@ div.show{
     grid-template-columns: 1fr 1fr 1fr;
     
     position: relative;
+    max-width: 940px;
 }
 
 .item {
@@ -301,3 +455,80 @@ img.img-oneproduct{
     height: 80%;
     object-fit: contain;
 }
+
+
+/* TABLE sales/ Cart*/
+
+.table-container{
+    display: block;
+    padding: 40px;
+    box-sizing: border-box;
+
+}
+.table-container table{
+    border-spacing: 0;
+}
+
+.table-container thead tr th {
+    text-align: left;
+
+}
+
+td,th {
+    padding: 16px;
+    border-bottom: 1px solid #d9d9d9;
+
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+tbody tr td:first-child{
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+    
+}
+
+
+tbody tr td:first-child span{
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8%;
+    box-shadow: 3px 1px 6px -4px black;
+    border: 1px solid white;
+}
+
+th{
+    text-transform: uppercase;
+    color: #777;
+    font-size: 14px;
+}
+
+tbody tr td:last-child a,
+.table-container > a {
+        background-color: darkslateblue;
+        padding: 8px 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: white;
+        font-size: 12px;
+        border-radius: 4px;
+
+}
+
+.table-container > a {
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+
+.table-container thead tr th:last-child,
+td:last-child{
+    text-align: center;
+}
+

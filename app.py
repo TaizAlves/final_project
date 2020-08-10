@@ -387,7 +387,7 @@ def buy(id):
         con.commit()
         flash("Bought!")
 
-        return redirect("/products")
+        return redirect("/products/cart")
 
     except Exception as error:
         print(error)
@@ -403,9 +403,12 @@ def cart():
         
         cur.execute("SELECT products.img,products.title, products.price,sales.quantity,sales.created_at,users.status , products.id as productId FROM sales JOIN products ON products.id = sales.product_id JOIN users ON sales.user_id = users.id WHERE products.id = sales.product_id AND users.id = (?)", user_id)
         cart_client= cur.fetchall()
-        print(cart_client)
-        print(cart_client[0][5])
+        if not cart_client:
+            flash("You have 0 products in your cart")
+            return redirect("/products")
+
         
+
         
         cur.execute("SELECT status FROM users WHERE id = (?)", user_id)
         status = cur.fetchall()
