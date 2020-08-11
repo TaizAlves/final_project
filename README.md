@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Logo" title="Logo" src="/static/images/logo.jpg" />
+    <img alt="Logo" title="Logo" src="/static/images/logo.jpg" style="width:3rem"/>
 </h1>
 
 <p align="center">
@@ -18,7 +18,4 @@
 
 <br>
 
-<p align="center">
-  <img alt="Proffy" src=".github/proffy.png" width="100%">
-</p>
 
