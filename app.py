@@ -38,32 +38,15 @@ Session(app)
 def index():
 
     try:
-        cur.executescript('''
-       
-
-        CREATE TABLE IF NOT EXISTS 'category' (
-            'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            'name' varchar(255) NOT NULL
-            );
-
-        CREATE TABLE IF NOT EXISTS 'recipes' (
-            'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            'title' varchar(255) NOT NULL,
-            'description' text NOT NULL,
-            'more_info' text,
-            'created_at' DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-            'category_id' INTEGER NOT NULL,
-            'user_id' INTEGER NOT NULL,
-            FOREIGN KEY (category_id) REFERENCES category(id),
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-            );
-        ''')
-
-        cur.execute("SELECT * FROM recipes")
-        rows = cur.fetchall()
         
+        cur.execute("SELECT * FROM products")
+        products = cur.fetchall()
+        #print(products)
+        
+        nr = len(products)
     
-        return render_template("index.html", rows = rows)
+    
+        return render_template("index.html", products = products, nr = nr)
 
     except Exception as e:
         print(e)
@@ -95,16 +78,7 @@ def register():
             # hash the password 
             hash = generate_password_hash(request.form['password'])
 
-            cur.executescript('''
-                CREATE TABLE IF NOT EXISTS 'users' (
-                    'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    'name' text NOT NULL,
-                    'email' text UNIQUE NOT NULL,
-                    'hash' text NOT NULL,
-                    'status', text NOT NULL DEFAULT "client",
-                    'created_at' DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP );
-                    ''')
-            
+                      
             try: 
                 cur.execute("INSERT INTO users (name, email, hash, status) VALUES (?,?,?, ?)", (name, email, hash, status))
                 con.commit()
@@ -306,11 +280,11 @@ def product():
             avatar_url = request.form['avatar_url']
             category_id = request.form['category']
 
-            cur.execute("INSERT INTO products (img,title, description, user_id, category_id) VALUES (?,?,?,?,?)", (avatar_url, title, description,price, user_id, category_id)) 
+            cur.execute("INSERT INTO products (img,title, description,price, user_id, category_id) VALUES (?,?,?,?,?,?)", (avatar_url, title, description,price, user_id, category_id)) 
             con.commit()
             
             
-            flash("Thank you! New recipe add.")
+            flash("Thank you! New product add.")
             return redirect("/")
             
 
@@ -325,7 +299,7 @@ def allproducts():
         #colocar como objeto no select !importante!!
         #user_id = [session["user_id"]]
         #print(user_id)
-
+        
                 
         cur.execute("SELECT products.img, products.title, products.description, products.price, products.category_id, products.id FROM products LEFT JOIN category ON products.category_id = category_id GROUP BY products.id")
         products = cur.fetchall()
@@ -408,8 +382,6 @@ def cart():
             return redirect("/products")
 
         
-
-        
         cur.execute("SELECT status FROM users WHERE id = (?)", user_id)
         status = cur.fetchall()
         status = status[0][0] 
@@ -447,10 +419,42 @@ def sales():
 
         else:
             
-            return redirect("/products/cart")
-
-        
+            return redirect("/products/cart")        
 
     except Exception as error:
         print(error)
         return redirect("/products")
+
+
+@app.route("/products/search", methods=["GET", "POST"])
+def search():
+    """Recipies"""
+    try:
+        if request.method == "GET":
+            
+            return redirect('/recipes')
+            
+            
+
+        else:
+            
+            
+            filter = request.form['filter']
+            filter = [filter]
+              
+
+            cur.execute("SELECT * FROM products WHERE title OR description LIKE '%'||?||'%'", filter)
+            filtered_product= cur.fetchall()
+            print(filtered_product)
+            
+            cur.execute("SELECT * FROM recipes WHERE title OR description LIKE '%'||?||'%'", filter)
+            filtered_recipe = cur.fetchall()
+            print(filtered_recipe)
+
+            total = len(filtered_product) + len(filtered_recipe)
+        
+            return render_template("search.html", products = filtered_product, recipe = filtered_recipe, total = total, len_prod = len(filtered_product), len_rec = len(filtered_recipe), filter= filter)
+
+    except Exception as error:
+        print(error)
+        return redirect("/")

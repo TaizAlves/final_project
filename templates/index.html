@@ -24,77 +24,27 @@
         </div>
           
           <div class="last_updated">
-            <h1> Featured products</h1>
+            <h1> Lastest Products</h1>
           </div>
         
-        <div class="product-wrapper" style="grid-gap: 2rem;">
+      <div class="product-wrapper" style="grid-gap: 2rem;">
 
-          <div class= "featured">
+        {% for i in range (3)%}
+        <div class= "featured">
 
-            <div class="img-product">
-                <img src="https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="featured-img"  alt="">
+            <div class="img-index-product">
+                <img src="{{products[i][1]}}" class="featured-img"  alt="{{products[i][2]}}">
             </div> 
   
-            <div class="sub-item">
-    
-                <h5 class="title">Nome do Produto </h5>
-        
-                <p class="recip-text">Category: </p>
-
-
-                <div class= "button-product">
-              
-                </div>
-                <a class="button-see" href="#">ver</a>
+            <div class="sub-last-products">
+                <h5 >{{products[i][2]}}</h5>
+                <p >Price: <strong>{{products[i][6]}}</strong>  </p>
+                <a class="btn btn-success" href="/products/{{products[i][0]}}">ver</a>
+            </div>
         </div>
 
-        
-    </div>
-
-    <div class= "featured">
-
-      <div class="img-product">
-          <img src="https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="featured-img"  alt="">
-      </div> 
-
-      <div class="sub-item">
-
-          <h5 class="title">Nome do Produto </h5>
+        {%endfor%}
   
-          <p class="recip-text">Category: </p>
-
-
-          <div class= "button-product">
-        
-          </div>
-          <a class="button-see" href="#">ver</a>
-  </div>
-
-
-
-  
-</div>
-
-<div class= "featured">
-
-  <div class="img-product">
-      <img src="https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" class="featured-img" alt="">
-  </div> 
-
-  <div class="sub-item">
-
-      <h5 class="title">Nome do Produto </h5>
-
-      <p class="recip-text">Category: </p>
-
-
-      <div class= "button-product">
-    
-      </div>
-      <a class="button-see" href="#">ver</a>
-</div>
-
-
 
 
 </div>

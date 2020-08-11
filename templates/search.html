@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Products
+{% endblock %}
+
+{% block main %}
+
+
+<section class="search-products container">
+    <aside>
+        <div class="header">
+            <h2>{{filter}}</h2>
+            <p>{{total}} encontrados</p>
+        </div>
+
+     </aside>
+
+     <div class="filtered">
+        <fieldset class="product">
+            {%if products%}
+
+            <div class="name">
+                <h1>Products</h1>
+            </div>
+         
+         {% for i in range (len_prod)%}
+         <div class= "product_search">
+     
+             <div class="img-search">
+                 <img src="{{products[i][1]}}" alt="{{products[i][2]}}">
+             </div> 
+     
+             <div class="sub-search">
+     
+                 <h5 class="title">{{products[i][2]}}</h5>       
+                 <p class="recip-text">
+                     {% if products[i][5]== 1%} 
+                     <span>Essencial oil </span>
+                     
+                     {%elif products[i][5] == 2%}
+                     <span>Herbal medicine</span>
+                     
+                     {% elif products[i][5]== 3 %} 
+                     <span>Bach Flower Therapy</span>  
+                     
+                     {% elif products[i][5] == 5 %}
+                     <span>Others</span> 
+                     
+                     {% else  %} 
+                     <span>Homeopathy</span> 
+                     {%endif%}
+                 </p>
+                              
+                 <div class= "button-product">       
+                     <a class="btn btn-success " href="/products/{{products[i][0]}}">ver</a>        
+                 </div>       
+             </div>   
+          </div> 
+         {%endfor%}
+         {%endif%}
+        </fieldset>
+
+
+    <fieldset class="recipe">
+    {% if recipe%}
+
+        <div class="name">
+           <h1>Recipes</h1>
+       </div>
+    
+    {% for i in range (len_rec)%}
+    <div class= "sub-search">
+           
+            <h5 >{{recipe[i][1]}}</h5>       
+            <p >
+                {% if recipe[i][5]== 1%} 
+                <span>Essencial oil </span>
+                
+                {%elif recipe[i][5] == 2%}
+                <span>Herbal medicine</span>
+                
+                {% elif recipe[i][5]== 3 %} 
+                <span>Bach Flower Therapy</span>  
+                
+                {% elif recipe[i][5] == 5 %}
+                <span>Others</span> 
+                
+                {% else  %} 
+                <span>Homeopathy</span> 
+                {%endif%}
+            </p>
+                         
+            <div class= "button-product">       
+                <a class="btn btn-success"href="/recipes/{{recipe[i][0]}}">ver</a>        
+            </div>       
+        </div>   
+    
+    {%endfor%}
+    {%endif%}
+    </fieldset>
+
+    </div>
+ </section>
+   
+
+ 
+
+       
+     
+{% endblock %}
