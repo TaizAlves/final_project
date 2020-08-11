@@ -449,6 +449,23 @@ img.card-img-top {
     max-height: 100%;
 }
 
+.fields .prod_item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    max-width: 61vw;
+}
+
+.fields .prod_item .card-img-top{
+    max-width: 68vw;
+}
+
+
+
 .sub-item{
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -472,16 +489,6 @@ div.button-product a.button-see{
 
 }
 
-div.button-product button.btn.btn-sm.btn-success{
-
-    text-align: justify;
-    margin-left: 127px;
-    padding: 10px 29px;
-    background-color: rgba(92, 150, 92, 0.808);
-    border-color: rgba(159, 197, 159, 0.808);
-    
-    
-}
 
 .fields {
     display: grid;
@@ -495,9 +502,22 @@ div.button-product button.btn.btn-sm.btn-success{
 
 img.img-oneproduct{
 
-    width: 45%;
-    height: 80%;
+    width: 68vw;
+    height: 21vw;
     object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+
+.fields .action{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0 12rem;
 }
 
 

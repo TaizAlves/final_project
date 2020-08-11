@@ -301,7 +301,7 @@ def allproducts():
         #print(user_id)
         
                 
-        cur.execute("SELECT products.img, products.title, products.description, products.price, products.category_id, products.id FROM products LEFT JOIN category ON products.category_id = category_id GROUP BY products.id")
+        cur.execute("SELECT products.img, products.title, products.description, products.price, products.category_id, products.id, products.quantity FROM products LEFT JOIN category ON products.category_id = category_id GROUP BY products.id")
         products = cur.fetchall()
         #print(products)
         

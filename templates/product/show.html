@@ -30,10 +30,10 @@
                 
                 <p id="categ" value="{{product[0][5]}}" >
                     {% if product[0][5]== 1%} 
-                    <span>essencial oil </span>
+                    <span>Essencial oil </span>
                     
                     {%elif product[0][5] == 2%}
-                    <span>herbal medicine</span>
+                    <span>Herbal medicine</span>
                     
                     {% elif product[0][5]== 3 %} 
                     <span>Bach Flower Therapy</span>  
@@ -52,18 +52,19 @@
             <p class="card-text"><strong>Price: {{product[0][6]}}</strong> </p>
         
 
-        
-        <a class="button-see" href="/products">continuar comprando</a>
-        {% if quantity > 0 %}
-            <form action="/products/{{product[0][0]}}" method="post">
-                <input type="hidden" name="product_id" value="{{product[0][0]}}"/>
-                <input type="number" name="quantity" min="1" placeholder="0" style="width: 50px" required />
-                <button class="btn btn-sm btn-sucess" type="submit">Buy</button>
-            </form>
-        {% else %}
-            <div class= "show">Quantity</div>
-            <p class="card-text"><strong>Produto Indisponivel</strong> </p>
-        {%endif%}
+        <div class="action">        
+            {% if quantity > 0 %}
+                <form action="/products/{{product[0][0]}}" method="post">
+                    <input type="hidden" name="product_id" value="{{product[0][0]}}"/>
+                    <input type="number" name="quantity" min="1" placeholder="0" style="width: 50px" required />
+                    <button class="btn btn-sm btn-primary" type="submit">Buy</button>
+                </form>
+            {% else %}
+                <div class= "show">Quantity</div>
+                <p class="card-text"><strong>Produto Indisponivel</strong> </p>
+            {%endif%}
+           <a class="btn btn-success" href="/products">continuar comprando</a>
+        </div>
     </div>
 </div>
 </section>
