@@ -30,23 +30,23 @@ There are some pages that´s  only possible to access if you are logged in, such
 
 I included an "internal access" , so the company can add new products and check the sales. You may access these pages with:
 
-email: n@natural.com
+email: n@natural.com       .
 password: 1111
 
-##### This project contains the following sections:
+#### This project contains the following sections:
 
-[x]Register
-[x]Login
-[x]Logout
-[x]Home Page
-[x]Product´s page with all the products
-[x]Single product 
-[x]Add product (only for "internal access")
-[x]Recipes 
-[x]Add recipe
-[x]Single recipe
-[x]Cart (for users/advisors)
-[x]Sales report (only for"internal access")
+-[x] Register
+-[x] Login
+-[x] Logout
+-[x] Home Page
+-[x] Product´s page with all the products
+-[x] Single product 
+-[x] Add product (only for "internal access")
+-[x] Recipes 
+-[x] Add recipe
+-[x] Single recipe
+-[x] Cart (for users/advisors)
+-[x] Sales report (only for"internal access")
  
 
 ## How to use
