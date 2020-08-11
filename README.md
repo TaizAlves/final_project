@@ -51,7 +51,7 @@ password: 1111
  
 
 ## How to use
-To run the web application use these commands:
+To run the web application use this command:
 ```
 $ flask run 
 ```
