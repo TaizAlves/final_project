@@ -30,7 +30,8 @@ There are some pages that´s  only possible to access if you are logged in, such
 
 I included an "internal access" , so the company can add new products and check the sales. You may access these pages with:
 
-email: n@natural.com       .
+email: n@natural.com
+
 password: 1111
 
 #### This project contains the following sections:
