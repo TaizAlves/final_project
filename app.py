@@ -83,7 +83,8 @@ def register():
                 cur.execute("INSERT INTO users (name, email, hash, status) VALUES (?,?,?, ?)", (name, email, hash, status))
                 con.commit()
             except :
-                flash("Error upload the info into the database")
+                flash("Error upload the info into the database. Invalid/already exist email ")
+                
                 return redirect("/register")
                 
             
