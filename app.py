@@ -426,34 +426,26 @@ def sales():
         return redirect("/products")
 
 
-@app.route("/products/search", methods=["GET", "POST"])
+@app.route("/products/search", methods=["POST"])
 def search():
     """Recipies"""
     try:
-        if request.method == "GET":
-            
-            return redirect('/recipes')
-            
+             
+        filter = request.form['filter']
+        filter = [filter]
             
 
-        else:
-            
-            
-            filter = request.form['filter']
-            filter = [filter]
-              
-
-            cur.execute("SELECT * FROM products WHERE title OR description LIKE '%'||?||'%'", filter)
-            filtered_product= cur.fetchall()
-            print(filtered_product)
-            
-            cur.execute("SELECT * FROM recipes WHERE title OR description LIKE '%'||?||'%'", filter)
-            filtered_recipe = cur.fetchall()
-            print(filtered_recipe)
-
-            total = len(filtered_product) + len(filtered_recipe)
+        cur.execute("SELECT * FROM products WHERE title OR description LIKE '%'||?||'%'", filter)
+        filtered_product= cur.fetchall()
+        print(filtered_product)
         
-            return render_template("search.html", products = filtered_product, recipe = filtered_recipe, total = total, len_prod = len(filtered_product), len_rec = len(filtered_recipe), filter= filter)
+        cur.execute("SELECT * FROM recipes WHERE title OR description LIKE '%'||?||'%'", filter)
+        filtered_recipe = cur.fetchall()
+        print(filtered_recipe)
+
+        total = len(filtered_product) + len(filtered_recipe)
+    
+        return render_template("search.html", products = filtered_product, recipe = filtered_recipe, total = total, len_prod = len(filtered_product), len_rec = len(filtered_recipe), filter= filter)
 
     except Exception as error:
         print(error)
