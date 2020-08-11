@@ -99,6 +99,11 @@ header .logo-header a {
 
 }
 
+header button{
+    background: none;
+    border: none;
+
+}
 @media (min-width: 700px) {
     .page-header{
         height: 100px;
@@ -451,8 +456,10 @@ img.card-img-top {
 }
 
 .button-product{
-
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 div.button-product a.button-see{
     color: white;
