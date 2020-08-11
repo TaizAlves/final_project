@@ -1,5 +1,9 @@
 <h1 align="center">
+<<<<<<< HEAD
     <img alt="Logo" title="Logo" src="/static/images/logo.jpg" style="width:3rem"/>
+=======
+    <img alt="Logo" title="Logo" src="/static/images/logo.jpg" style="width:3rem;"/>
+>>>>>>> 8965a30e7166291a70bfc81a41ad45cc281fb0b2
 </h1>
 
 <p align="center">
@@ -17,5 +21,8 @@
 </p>
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8965a30e7166291a70bfc81a41ad45cc281fb0b2
 
