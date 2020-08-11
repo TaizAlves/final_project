@@ -4,8 +4,8 @@
 
 <p align="center">
   <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-use">How to Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#use">How to Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 
 <p align="center">
@@ -15,14 +15,14 @@
 </p>
 
 
-## Technologies
+## :Technologies
 
 - [Python3](https://www.python.org/)
 - [flask](https://pypi.org/project/Flask/)
 - [SQLite](https://www.sqlite.org/index.html)
 - [JavaScript](https://www.javascript.com)
 
-## Project
+## :Project
 This is my final project for [Harvard CS50x course](https://cs50.harvard.edu/x/2020/). It´s called "Hatural Healing". At the site it´s possible to buy some products and, also, to ready some recipes and include one of your own.
 
 ### Description
@@ -39,6 +39,7 @@ password: 1111
 - [x] Register
 - [x] Login
 - [x] Logout
+- [x] Search
 - [x] Home Page
 - [x] Product´s page with all the products
 - [x] Single product 
@@ -50,7 +51,7 @@ password: 1111
 - [x] Sales report (only for"internal access")
  
 
-## How to use
+## :How to use
 To run the web application use this command:
 ```
 $ flask run 
