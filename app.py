@@ -4,6 +4,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from utils import login_required, usd
+from datetime import date
 
 
 
@@ -39,7 +40,7 @@ def index():
 
     try:
         
-        cur.execute("SELECT * FROM products")
+        cur.execute("SELECT * FROM products ORDER BY created_at DESC LIMIT 3")
         products = cur.fetchall()
         #print(products)
         
