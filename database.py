@@ -44,6 +44,7 @@ cur.executescript('''
                     'quantity' INTEGER DEFAULT 10,
                     'user_id' INTEGER NOT NULL,
                     'category_id' INTEGER NOT NULL,
+                    'created_at' DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					FOREIGN KEY (category_id) REFERENCES category(id)
 					FOREIGN KEY (user_id) REFERENCES users(id)
 					);
