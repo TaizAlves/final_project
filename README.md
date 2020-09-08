@@ -23,7 +23,7 @@
 - [JavaScript](https://www.javascript.com)
 
 ## :Project
-This is my final project for [Harvard CS50x course](https://cs50.harvard.edu/x/2020/). It´s called "Hatural Healing". At the site it´s possible to buy some products and, also, to ready some recipes and include one of your own.
+This is my final project for [Harvard CS50x course](https://cs50.harvard.edu/x/2020/). It´s called "Hatural Healing". At the site it´s possible to buy some products and, also, to read some recipes and include one of your own.
 
 ### Description
 There are some pages that´s  only possible to access if you are logged in, such as add recipe, buy product and check your list of products "bought".
