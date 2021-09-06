@@ -58,4 +58,6 @@ $ flask run
 ```
 
 
+## :How could I improve it? 
+I should have used SQLAlquemy
 
